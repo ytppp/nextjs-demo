@@ -3,5 +3,7 @@ module.exports = {
   rules: {
     "type-enum": [2, "always", ["feat", "fix", "revert"]],
     "subject-max-length": [1, "always", 30],
+    "subject-empty": [0],
+    "type-empty": [0]
   },
 };
