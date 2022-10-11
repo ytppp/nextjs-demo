@@ -23,7 +23,8 @@ const Home: NextPage<IProps> = ({ title, description, list }) => {
           {list?.map((item, index) => {
             return (
               <div
-                key={index} className={styles.card}
+                key={index}
+                className={styles.card}
                 onClick={(): void => {
                   window.open(
                     item.link,
