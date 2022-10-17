@@ -16,9 +16,7 @@ const Home: NextPage<IProps> = ({ title, description, list }) => {
     <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>{title}</h1>
-
         <p className={styles.description}>{description}</p>
-
         <div className={styles.grid}>
           {list?.map((item, index) => {
             return (
