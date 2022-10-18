@@ -11,4 +11,19 @@
   left: 0;
   padding: 20px 32px;
   z-index: 100;
+  .logo_icon {
+    width: 70px;
+    height: 20px;
+    background-image: var(--navbar-icon);
+    background-size: 70px 20px;
+    background-repeat: no-repeat;
+  }
+  .theme_icon {
+    width: 20px;
+    height: 20px;
+    background-image: var(--theme-icon);
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
 }
