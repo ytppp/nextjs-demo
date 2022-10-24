@@ -1,6 +1,8 @@
 import type { NextPage } from "next";
 import styles from "./index.module.scss";
-
+import cName from "classnames";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ThemeContext } from "@/stores/theme";
 interface IProps {
   title: string;
   description: string;
@@ -12,9 +14,20 @@ interface IProps {
 }
 
 const Home: NextPage<IProps> = ({ title, description, list }) => {
+  const mainRef = useRef<HTMLDivElement>(null);
+  const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    mainRef.current?.classList.remove(styles.withAnimation);
+    // requestAnimationFrame会强制浏览器在重绘前调用指定的函数来进行动画的更新
+    window.requestAnimationFrame(() => {
+      mainRef.current?.classList.add(styles.withAnimation);
+    });
+  }, [theme]);
+
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
+      <main className={cName([styles.main, styles.withAnimation])} ref={mainRef}>
         <h1 className={styles.title}>{title}</h1>
         <p className={styles.description}>{description}</p>
         <div className={styles.grid}>

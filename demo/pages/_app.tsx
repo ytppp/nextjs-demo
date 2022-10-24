@@ -4,26 +4,33 @@ import App from "next/app";
 import { Layout, ILayoutProps } from "@/components/layout";
 import Head from "next/head";
 import axios from "axios";
-import { LOCALDOMAIN } from "@/utils";
+import { LOCALDOMAIN, getIsMobile } from "@/utils";
 import { ThemeContextProvider } from "@/stores/theme";
+import { UserAgentProvider } from "@/stores/userAgent";
 
 const MyApp = (data: AppProps & ILayoutProps) => {
-  const { Component, pageProps, navbarData, footerData } = data;
+  const { Component, pageProps, navbarData, footerData, isMobile } = data;
 
   return (
     <div>
       <Head>
-        <title>A Demo for 《深入浅出SSR官网开发指南》</title>
+        <title>{`A Demo for 《深入浅出SSR官网开发指南》(${
+          isMobile ? "移动端" : "pc端"
+        })`}</title>
         <meta
           name="description"
-          content="A Demo for 《深入浅出SSR官网开发指南》"
+          content={`A Demo for 《深入浅出SSR官网开发指南》(${
+            isMobile ? "移动端" : "pc端"
+          })`}
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ThemeContextProvider>
-        <Layout navbarData={navbarData} footerData={footerData}>
-          <Component {...pageProps} />
-        </Layout>
+        <UserAgentProvider>
+          <Layout navbarData={navbarData} footerData={footerData}>
+            <Component {...pageProps} />
+          </Layout>
+        </UserAgentProvider>
       </ThemeContextProvider>
     </div>
   );
@@ -37,6 +44,7 @@ MyApp.getInitialProps = async (context: AppContext) => {
   return {
     ...pageProps,
     ...data,
+    isMobile: getIsMobile(context)
   };
 };
 
