@@ -4,9 +4,14 @@ import App from "next/app";
 import { Layout, ILayoutProps } from "@/components/layout";
 import Head from "next/head";
 import axios from "axios";
-import { LOCALDOMAIN, getIsMobile } from "@/utils";
+import { LOCALDOMAIN, getIsMobile, getIsSupportWebp } from "@/utils";
 import { ThemeContextProvider } from "@/stores/theme";
 import { UserAgentProvider } from "@/stores/userAgent";
+
+export interface IComponentProps {
+  isMobile?: boolean;
+  isSupportWebp?: boolean;
+}
 
 const MyApp = (data: AppProps & ILayoutProps) => {
   const { Component, pageProps, navbarData, footerData, isMobile } = data;

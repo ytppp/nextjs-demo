@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ILayoutProps } from "@/components/layout";
 import { CMSDOMAIN } from "@/utils";
 import { isEmpty } from "lodash";
-
+import nextConnect from "next-connect";
 
 const getLayoutData = (
   req: NextApiRequest,
@@ -47,5 +47,6 @@ const getLayoutData = (
     });
   });
 }
+
 
 export default getLayoutData;
