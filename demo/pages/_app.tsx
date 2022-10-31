@@ -13,8 +13,8 @@ export interface IComponentProps {
   isSupportWebp?: boolean;
 }
 
-const MyApp = (data: AppProps & ILayoutProps) => {
-  const { Component, pageProps, navbarData, footerData, isMobile } = data;
+const MyApp = (data: AppProps & ILayoutProps & {isMobile: boolean; isSupportWebp: boolean}) => {
+  const { Component, pageProps, navbarData, footerData, isMobile, isSupportWebp } = data;
 
   return (
     <div>
@@ -33,7 +33,11 @@ const MyApp = (data: AppProps & ILayoutProps) => {
       <ThemeContextProvider>
         <UserAgentProvider>
           <Layout navbarData={navbarData} footerData={footerData}>
-            <Component {...pageProps} />
+            <Component
+              {...pageProps}
+              isMobile={isMobile}
+              isSupportWebp={isSupportWebp}
+            />
           </Layout>
         </UserAgentProvider>
       </ThemeContextProvider>
@@ -49,7 +53,8 @@ MyApp.getInitialProps = async (context: AppContext) => {
   return {
     ...pageProps,
     ...data,
-    isMobile: getIsMobile(context)
+    isMobile: getIsMobile(context),
+    isSupportWebp: getIsSupportWebp(context)
   };
 };
 

@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { LOCALDOMAIN } from "@/utils";
 import axios from "axios";
 import styles from "./styles.module.scss";
+const showdown = require("showdown");
 
 export interface IArticleProps {
   title: string;
@@ -18,6 +19,7 @@ const Article: NextPage<IArticleProps> = ({
   createTime,
   content,
  }) => {
+  const converter = new showdown.Converter();
   return (
     <div className={styles.article}>
       <h1 className={styles.title}>{title}</h1>
@@ -27,8 +29,8 @@ const Article: NextPage<IArticleProps> = ({
       <div className={styles.description}>{description}</div>
       <div
         className={styles.content}
+        dangerouslySetInnerHTML={{ __html: converter.makeHtml(content) }}
       >
-        {content}
       </div>
     </div>
   );
