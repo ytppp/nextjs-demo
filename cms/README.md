@@ -1,6 +1,4 @@
-# A demo for 《SSR 实战：官网开发指南》 - CMS
-
-掘金小册《SSR 实战：官网开发指南》实战篇数据层 CMS demo
+数据层 CMS demo
 
 ## 登录
 
